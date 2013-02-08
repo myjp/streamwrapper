@@ -1,0 +1,10 @@
+Step by step assistant for scheduled stream recordings using streamripper and 'at' jobs.
+
+Streamripper (http://streamripper.sourceforge.net/) is a nice and powerful way to record online radio streams. Unfortunately the parameters are quite complex and if one does not use it regularly, its wrong use may cause unwanted effects.
+
+This script asks for the relevant informations step by step and creates an 'at' job with corresponding streamripper command. The output file name will be like [date]_[time]_recording-name (e.g. 1970-01-01_10:00_cool-recording.ogg). Adapt output directory in OUTPUT_DIR variable. 
+
+Before using adapt output directory in OUTPUT_DIR variable. Then just execute streamwrapper.py. There are no parameters needed.
+
+Warning: Just for personal use. The URL and recording name inputs are not checked and are vulnerable for unwanted injections. It's also recommended to test functionality of specific stream URL before relying on it.
+
