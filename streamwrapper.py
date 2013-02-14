@@ -4,6 +4,7 @@ import time
 import re
 import datetime
 import os
+import sys
 
 # specify output directory for your recordings
 OUTPUT_DIR = "~/"
@@ -72,7 +73,7 @@ while 1:
 	input = input.strip()
 
 	# manual check of input with regular expression
-	if re.match("\d+:[0-5]\d", input) != None:		
+	if re.match("\d+:[0-5]\d", input) != None:
 		ipt_hours = int(input.split(":")[0])
 		ipt_minutes = int(input.split(":")[1])
 
@@ -91,4 +92,7 @@ streamripper = "streamripper %(url)s -s -A -l %(length)s -d %(outputdir)s -a %(f
 at = "echo '%(streamripper)s' | at -M %(time)s %(date)s" % {"streamripper" : streamripper, "time" : time.strftime("%H:%M", starttime), "date" : time.strftime("%m/%d/%Y", startdate)}
 
 # execute command
-os.system(at)
+if sys.argv[1] == "-s" or sys.argv[1] == "--show"
+	print streamripper
+else:
+	os.system(at)
