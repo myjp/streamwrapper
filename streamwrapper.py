@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-import time
 import re
 import datetime
 import os
@@ -45,10 +44,10 @@ while 1:
 while 1:
 	print "Enter recording date [dd.mm.yyyy]:",
 	input = raw_input()
-	input = input.strip()
+	input = input.strip().lower()
 
 	try:
-		startdate = time.strptime(input, "%d.%m.%Y")
+		startdate = datetime.datetime.strptime(input, "%d.%m.%Y")
 		break
 	except ValueError:
 		print "Wrong input format [dd.mm.yyyy].  Try again."
@@ -58,10 +57,10 @@ while 1:
 while 1:
 	print "Enter recording time [hh:mm]:",
 	input = raw_input()
-	input = input.strip()
+	input = input.strip().lower()
 
 	try:
-		starttime = time.strptime(input, "%H:%M")
+		starttime = datetime.datetime.strptime(input, "%H:%M")
 		break
 	except ValueError:
 		print "Wrong input format [hh:mm].  Try again."
@@ -82,17 +81,18 @@ while 1:
 	else:
 		print "Wrong input format [hh:mm].  Try again."
 
+
 # creating file name of recording
-filename = time.strftime("%Y-%m-%d", startdate) + "_" + time.strftime("%H:%M", starttime) + "_" + name
+filename = startdate.strftime("%Y-%m-%d") + "_" + starttime.strftime("%H:%M") + "_" + name
 
 # creating streamripper command
 streamripper = "streamripper %(url)s -s -A -l %(length)s -d %(outputdir)s -a %(filename)s" % {"url" : url, "length" : length.seconds, "outputdir" : OUTPUT_DIR, "filename" : filename}
 
-# creating at command
-at = "echo '%(streamripper)s' | at -M %(time)s %(date)s" % {"streamripper" : streamripper, "time" : time.strftime("%H:%M", starttime), "date" : time.strftime("%m/%d/%Y", startdate)}
+at = "echo '%(streamripper)s' | at -M %(time)s %(date)s" % {"streamripper" : streamripper, "time" : starttime.strftime("%H:%M"), "date" : startdate.strftime("%m/%d/%Y")}
 
 # execute command
-if sys.argv[1] == "-s" or sys.argv[1] == "--show":
-	print streamripper
-else:
+try:
+	if sys.argv[1] == "-s" or sys.argv[1] == "--show":
+		print streamripper
+except  IndexError:
 	os.system(at)
