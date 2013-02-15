@@ -82,7 +82,7 @@ while 1:
 		print "Wrong input format [hh:mm].  Try again."
 
 
-# creating file name of recording
+# creating file name for recording
 filename = startdate.strftime("%Y-%m-%d") + "_" + starttime.strftime("%H:%M") + "_" + name
 
 # creating streamripper command
