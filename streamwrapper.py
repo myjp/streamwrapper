@@ -92,7 +92,7 @@ streamripper = "streamripper %(url)s -s -A -l %(length)s -d %(outputdir)s -a %(f
 at = "echo '%(streamripper)s' | at -M %(time)s %(date)s" % {"streamripper" : streamripper, "time" : time.strftime("%H:%M", starttime), "date" : time.strftime("%m/%d/%Y", startdate)}
 
 # execute command
-if sys.argv[1] == "-s" or sys.argv[1] == "--show"
+if sys.argv[1] == "-s" or sys.argv[1] == "--show":
 	print streamripper
 else:
 	os.system(at)
