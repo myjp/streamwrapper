@@ -94,5 +94,8 @@ at = "echo '%(streamripper)s' | at -M %(time)s %(date)s" % {"streamripper" : str
 try:
 	if sys.argv[1] == "-s" or sys.argv[1] == "--show":
 		print streamripper
+		sys.exit(0)
 except  IndexError:
-	os.system(at)
+	pass
+
+os.system(at)
